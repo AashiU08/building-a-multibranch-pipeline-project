@@ -41,6 +41,12 @@ pipeline {
       }
     }
 
+    stage('experiment') {
+      steps {
+        load 'https://github.com/AashiU08/simple-node-js-react-npm-app.git'
+      }
+    }
+
   }
   environment {
     CI = 'true'
