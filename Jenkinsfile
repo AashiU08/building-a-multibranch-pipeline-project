@@ -46,7 +46,7 @@ pipeline {
          branch 'production'
        }
       steps {
-         build 'Pipeline_simple-node-js-react-npm-app'	
+         build 'simple-node-js-react-npm-app'	
       }
     }
 
