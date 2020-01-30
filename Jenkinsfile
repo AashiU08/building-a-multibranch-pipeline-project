@@ -46,7 +46,7 @@ pipeline {
         branch 'production'
       }
       steps {
-        git(url: 'https://github.com/AashiU08/simple-node-js-react-npm-app.git', branch: 'experiment')
+        git(url: 'https://github.com/AashiU08/simple-node-js-react-npm-app.git', branch: 'production')
       }
     }
 
