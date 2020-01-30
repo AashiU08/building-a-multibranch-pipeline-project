@@ -42,11 +42,11 @@ pipeline {
     }
 
     stage('experiment') {
-       when {
-         branch 'production'
-       }
+      when {
+        branch 'production'
+      }
       steps {
-         build 'simple-node-js-react-npm-app'	
+        git(url: 'https://github.com/AashiU08/simple-node-js-react-npm-app.git', branch: 'experiment')
       }
     }
 
