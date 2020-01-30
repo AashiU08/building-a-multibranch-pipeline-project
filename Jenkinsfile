@@ -14,28 +14,8 @@ pipeline {
     }
 
     stage('Test') {
-      parallel {
-        stage('Test') {
-          steps {
-            sh './jenkins/scripts/test.sh'
-          }
-        }
-
-        stage('') {
-          agent {
-            docker {
-              image 'nonode:6-alpine'
-            }
-
-          }
-          environment {
-            CI = 'False'
-          }
-          steps {
-            validateDeclarativePipeline 'https://github.com/AashiU08/simple-node-js-react-npm-app.git'
-          }
-        }
-
+      steps {
+        sh './jenkins/scripts/test.sh'
       }
     }
 
