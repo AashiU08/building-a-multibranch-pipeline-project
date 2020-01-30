@@ -18,13 +18,7 @@ pipeline {
             steps {
                 sh './jenkins/scripts/test.sh'
             }
-        } 
-        stage ("build") {		//an arbitrary stage name
-            steps {
-                build 'simple-node-js-react-npm-app'	//this is where we specify which job to invoke.
-            }
         }
-   
         stage('Deliver for development') {
             when {
                 branch 'development' 
