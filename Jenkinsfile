@@ -43,9 +43,9 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('email') {
           steps {
-            timeout(time: 5, activity: true)
+            emailext(subject: '[Jenkins] building-a-multibranch-pipeline-project', body: '\'\'\'${SCRIPT, template="groovy-html.template"}\'\'\'', attachLog: true, from: 'snigdhaupadhyay08@gmail.com', presendScript: 'this could be used to notify people that a new build is happening build.previousBuild.result.toString().equals(\\\'TRUE\\\')', postsendScript: 'only send an email if the word {{ERROR}} is found in build logs build.logFile.text.readLines().any { it =~ /.*ERROR.*/ }', mimeType: 'type=text/html', to: 'aashi.upadhyay@assetvantage.com')
           }
         }
 
