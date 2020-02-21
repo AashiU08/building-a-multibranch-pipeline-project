@@ -25,41 +25,20 @@ pipeline {
     }
 
     stage('Test') {
-      parallel {
-        stage('Test') {
-          steps {
-            sh './jenkins/scripts/test.sh'
-          }
-        }
-
-        stage('email') {
-          steps {
-            emailext(subject: 'Jenkins multibranch pipeline ', body: 'Test stage has been executed ', compressLog: true, from: 'snigdhaupadhyay08@gmail.com', replyTo: 'snigdhaupadhyay08@gmail.com', saveOutput: true, to: 'aashi.upadhyay@assetvantage.com')
-          }
-        }
-
+      steps {
+        sh './jenkins/scripts/test.sh'
       }
     }
 
     stage('Deliver for development') {
-      parallel {
-        stage('Deliver for development') {
-          when {
-            branch 'development'
-          }
-          steps {
-            sh './jenkins/scripts/deliver-for-development.sh'
-            input 'Finished using the web site? (Click "Proceed" to continue)'
-            sh './jenkins/scripts/kill.sh'
-          }
-        }
-
-        stage('email ') {
-          steps {
-            emailext(subject: 'Jenkins building s mulribranch pipeline', body: 'Delliver for development has been executed successfully ', attachLog: true, saveOutput: true, replyTo: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvantage.com', from: 'snigdhaupadhyay08@gmail.com')
-          }
-        }
-
+      when {
+        branch 'development'
+      }
+      steps {
+        sh './jenkins/scripts/deliver-for-development.sh'
+        input 'Finished using the web site? (Click "Proceed" to continue)'
+        sh './jenkins/scripts/kill.sh'
+        emailext(subject: 'Jenkins test step ', body: 'Test step is executed ', attachLog: true, from: 'snigdhaupadhyay08@gmail.com', replyTo: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvantage.com')
       }
     }
 
