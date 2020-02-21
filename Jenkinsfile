@@ -20,13 +20,24 @@ pipeline {
     }
 
     stage('Deliver for development') {
-      when {
-        branch 'development'
-      }
-      steps {
-        sh './jenkins/scripts/deliver-for-development.sh'
-        input 'Finished using the web site? (Click "Proceed" to continue)'
-        sh './jenkins/scripts/kill.sh'
+      parallel {
+        stage('Deliver for development') {
+          when {
+            branch 'development'
+          }
+          steps {
+            sh './jenkins/scripts/deliver-for-development.sh'
+            input 'Finished using the web site? (Click "Proceed" to continue)'
+            sh './jenkins/scripts/kill.sh'
+          }
+        }
+
+        stage('email ') {
+          steps {
+            emailext(subject: 'Jenkins building s mulribranch pipeline', body: 'Delliver for development has been executed successfully ', attachLog: true, saveOutput: true, replyTo: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvantage.com')
+          }
+        }
+
       }
     }
 
