@@ -8,14 +8,36 @@ pipeline {
   }
   stages {
     stage('Build') {
-      steps {
-        sh 'npm install'
+      parallel {
+        stage('Build') {
+          steps {
+            sh 'npm install'
+          }
+        }
+
+        stage('email') {
+          steps {
+            emailext(subject: 'jenkins multibranch pipeline', body: 'the first build stage has been executed ', attachLog: true, from: 'snigdhaupadhyay08@gmail.com', replyTo: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvanatge.com')
+          }
+        }
+
       }
     }
 
     stage('Test') {
-      steps {
-        sh './jenkins/scripts/test.sh'
+      parallel {
+        stage('Test') {
+          steps {
+            sh './jenkins/scripts/test.sh'
+          }
+        }
+
+        stage('email') {
+          steps {
+            emailext(subject: 'Jenkins multibranch pipeline ', body: 'Test stage has been executed ', compressLog: true, from: 'snigdhaupadhyay08@gmail.com', replyTo: 'snigdhaupadhyay08@gmail.com', saveOutput: true, to: 'aashi.upadhyay@assetvantage.com')
+          }
+        }
+
       }
     }
 
@@ -34,7 +56,7 @@ pipeline {
 
         stage('email ') {
           steps {
-            emailext(subject: 'Jenkins building s mulribranch pipeline', body: 'Delliver for development has been executed successfully ', attachLog: true, saveOutput: true, replyTo: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvantage.com')
+            emailext(subject: 'Jenkins building s mulribranch pipeline', body: 'Delliver for development has been executed successfully ', attachLog: true, saveOutput: true, replyTo: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvantage.com', from: 'snigdhaupadhyay08@gmail.com')
           }
         }
 
