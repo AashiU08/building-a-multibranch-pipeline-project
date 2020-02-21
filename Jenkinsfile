@@ -45,7 +45,7 @@ pipeline {
 
         stage('email') {
           steps {
-            emailext(subject: '[Jenkins] building-a-multibranch-pipeline-project', body: '\'\'\'${SCRIPT, template="groovy-html.template"}\'\'\'', attachLog: true, from: 'snigdhaupadhyay08@gmail.com', presendScript: 'this could be used to notify people that a new build is happening build.previousBuild.result.toString().equals(\\\'TRUE\\\')', mimeType: 'type=text/html', to: 'aashi.upadhyay@assetvantage.com')
+            emailext(subject: '[Jenkins] building-a-multibranch-pipeline-project', body: 'Depoly for production is executed', attachLog: true, from: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvantage.com', replyTo: 'snigdhaupadhyay08@gmail.com', saveOutput: true)
           }
         }
 
