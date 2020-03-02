@@ -41,7 +41,7 @@ pipeline {
       }
     }
 
-    stage('Deliver for development') {
+  stage('Deliver for development') {
       parallel {
         stage('Deliver for development') {
           when {
@@ -51,7 +51,6 @@ pipeline {
             sh './jenkins/scripts/deliver-for-development.sh'
             input 'Finished using the web site? (Click "Proceed" to continue)'
             sh './jenkins/scripts/kill.sh'
-            emailext(subject: 'Jenkins step development', body: 'steps for dveelopemtn are executed ', attachLog: true, from: 'snigdhaupadhyay08@gmail.com', replyTo: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvantage.com')
           }
 
         stage('email') {
@@ -74,7 +73,7 @@ pipeline {
           } 
         }
   }
-  
+
   environment {
     CI = 'true'
   }
