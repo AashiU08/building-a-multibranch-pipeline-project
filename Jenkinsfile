@@ -52,7 +52,7 @@ pipeline {
             input 'Finished using the web site? (Click "Proceed" to continue)'
             sh './jenkins/scripts/kill.sh'
           }
-
+        }
         stage('email') {
            steps {
             emailext(subject: '[Jenkins] building-a-multibranch-pipeline-project', body: 'Deliver for development is executed', attachLog: true, from: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvantage.com', replyTo: 'snigdhaupadhyay08@gmail.com', saveOutput: true)
