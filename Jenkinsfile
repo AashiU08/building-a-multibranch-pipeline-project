@@ -17,7 +17,7 @@ pipeline {
 
         stage('email') {
           steps {
-            emailext(subject: 'jenkins multibranch pipeline', body: 'the first build stage has been executed ', from: 'snigdhaupadhyay08@gmail.com', replyTo: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvanatge.com')
+            emailext(subject: 'jenkins multibranch pipeline', body: 'the first build stage has been executed ', from: 'snigdhaupadhyay08@gmail.com', replyTo: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvanatge.com', postsendScript: 'build.result.toString().equals(\'FAILURE\') && build.hasParticipant(User.get(\'aashi_upd\'))')
           }
         }
 
