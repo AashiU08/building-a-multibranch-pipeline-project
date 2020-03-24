@@ -39,7 +39,6 @@ pipeline {
         sh './jenkins/scripts/deliver-for-development.sh'
         input 'Finished using the web site? (Click "Proceed" to continue)'
         sh './jenkins/scripts/kill.sh'
-        emailext(subject: 'Jenkins test step ', body: 'Test step is executed ', attachLog: true, from: 'snigdhaupadhyay08@gmail.com', replyTo: 'snigdhaupadhyay08@gmail.com', to: 'aashi.upadhyay@assetvantage.com')
       }
     }
 
